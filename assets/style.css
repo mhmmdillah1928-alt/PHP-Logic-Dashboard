@@ -1,0 +1,71 @@
+/* CSS bersama untuk semua halaman (Tailwind dimuat via CDN) */
+html { scroll-behavior: smooth; }
+body { font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif; }
+
+/* Popup */
+/* Kunci scroll halaman ketika dialog terbuka. */
+body.popup-open { overflow: hidden; }
+
+/* Lapisan modal dan animasi masuk/keluar. */
+.popup-overlay {
+    position: fixed; inset: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: center;
+    padding: 1rem;
+    background: rgba(8, 13, 27, .75);
+    backdrop-filter: blur(4px);
+    opacity: 0; transition: opacity .2s ease;
+}
+.popup-overlay.show { opacity: 1; }
+
+/* Panel dialog utama. */
+.popup-box {
+    width: 100%; max-width: 24rem;
+    border-radius: 1.5rem; background: #fff; color: #1e293b;
+    padding: 1.75rem 1.5rem 1.5rem; text-align: center;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, .45);
+    transform: translateY(12px) scale(.96);
+    transition: transform .25s ease;
+}
+.popup-overlay.show .popup-box { transform: none; }
+
+/* Ikon dan warna yang membedakan status popup. */
+.popup-icon {
+    display: flex; align-items: center; justify-content: center;
+    width: 4rem; height: 4rem; margin: 0 auto 1rem;
+    border-radius: 9999px; font-size: 1.75rem; font-weight: 900; color: #fff;
+}
+.popup-success .popup-icon { background: #059669; }
+.popup-error .popup-icon { background: #e11d48; }
+.popup-info .popup-icon { background: #2563eb; }
+
+.popup-title { font-size: 1.25rem; font-weight: 900; }
+.popup-message { margin-top: .4rem; font-size: .9rem; line-height: 1.5rem; color: #64748b; }
+
+/* Daftar ringkasan hasil di dalam popup. */
+.popup-items {
+    margin: 1rem 0 0; padding: 0; list-style: none; text-align: left;
+    border: 1px solid #e2e8f0; border-radius: .75rem; overflow: hidden;
+}
+.popup-items li {
+    display: flex; justify-content: space-between; gap: 1rem;
+    padding: .55rem .9rem; font-size: .85rem;
+}
+.popup-items li + li { border-top: 1px solid #f1f5f9; }
+.popup-items li:nth-child(odd) { background: #f8fafc; }
+.popup-items span { color: #64748b; }
+.popup-items strong { text-align: right; word-break: break-word; }
+
+/* Tombol penutup dan indikator fokus keyboard. */
+.popup-close {
+    width: 100%; margin-top: 1.25rem; padding: .8rem 1rem;
+    border: 0; border-radius: .75rem; cursor: pointer;
+    font-weight: 700; color: #fff; background: #4f46e5;
+    transition: background .15s ease;
+}
+.popup-close:hover { background: #4338ca; }
+.popup-close:focus-visible { outline: 4px solid #c7d2fe; }
+
+/* Hormati pengaturan pengurangan animasi pada perangkat pengguna. */
+@media (prefers-reduced-motion: reduce) {
+    .popup-overlay, .popup-box { transition: none; }
+}
